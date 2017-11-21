@@ -1,5 +1,3 @@
-import { util } from 'vue'
-
 export default {
   data () {
     return {
@@ -57,11 +55,11 @@ export default {
 
     fetch () {
       if (!this.$http) {
-        return util.warn('You need to provide a HTTP client', this)
+        throw new Error('You need to provide a HTTP client', this)
       }
 
       if (!this.src) {
-        return util.warn('You need to set the `src` property', this)
+        throw new Error('You need to set the `src` property', this)
       }
 
       const src = this.queryParamName
@@ -72,8 +70,8 @@ export default {
         ? Object.assign({ [this.queryParamName]: this.query }, this.data)
         : this.data
 
-      let cancel = new Promise((resolve) => this.cancel = resolve)
-      let request = this.$http.get(src, { params })
+      const cancel = new Promise((resolve) => this.cancel = resolve)
+      const request = this.$http.get(src, { params })
 
       return Promise.race([cancel, request])
     },
@@ -123,7 +121,7 @@ export default {
     },
 
     onHit () {
-      util.warn('You need to implement the `onHit` method', this)
+      throw new Error('You need to implement the `onHit` method', this)
     }
   }
 }

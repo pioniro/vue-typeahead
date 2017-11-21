@@ -16,8 +16,6 @@ var _assign = require('babel-runtime/core-js/object/assign');
 
 var _assign2 = _interopRequireDefault(_assign);
 
-var _vue = require('vue');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -79,11 +77,11 @@ exports.default = {
       var _this2 = this;
 
       if (!this.$http) {
-        return _vue.util.warn('You need to provide a HTTP client', this);
+        throw new Error('You need to provide a HTTP client', this);
       }
 
       if (!this.src) {
-        return _vue.util.warn('You need to set the `src` property', this);
+        throw new Error('You need to set the `src` property', this);
       }
 
       var src = this.queryParamName ? this.src : this.src + this.query;
@@ -133,7 +131,7 @@ exports.default = {
       }
     },
     onHit: function onHit() {
-      _vue.util.warn('You need to implement the `onHit` method', this);
+      throw new Error('You need to implement the `onHit` method', this);
     }
   }
 };
